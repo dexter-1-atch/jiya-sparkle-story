@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { MessageCircle, Smile } from "lucide-react";
 
 const chatMessages = [
@@ -77,35 +78,41 @@ const ChatSection = () => {
     <section id="chat-section" className="py-20 px-4 bg-gradient-to-b from-background to-muted">
       <div className="max-w-4xl mx-auto">
         {/* Section header */}
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <MessageCircle className="w-8 h-8 text-primary" />
+            <MessageCircle className="w-8 h-8 text-primary animate-bounce" />
             <h2 className="text-4xl md:text-5xl font-bold gradient-text">
               Your Amazing Conversations
             </h2>
-            <Smile className="w-8 h-8 text-accent" />
+            <Smile className="w-8 h-8 text-accent animate-pulse" />
           </div>
           <p className="text-lg text-muted-foreground">
             Capturing your incredible energy and enthusiasm! 💫
           </p>
-        </div>
+        </motion.div>
 
         {/* Chat messages */}
         <div className="space-y-6">
           {chatMessages.map((message) => (
-            <div
+            <motion.div
               key={message.id}
-              className={`flex ${message.isJiya ? 'justify-start' : 'justify-end'} ${
-                visibleMessages.includes(message.id) 
-                  ? message.isJiya 
-                    ? 'chat-slide-left' 
-                    : 'chat-slide-right'
-                  : 'opacity-0'
-              }`}
+              initial={{ opacity: 0, x: message.isJiya ? -100 : 100 }}
+              animate={{ 
+                opacity: visibleMessages.includes(message.id) ? 1 : 0,
+                x: visibleMessages.includes(message.id) ? 0 : (message.isJiya ? -100 : 100)
+              }}
+              transition={{ duration: 0.6, delay: message.delay / 1000 }}
+              className={`flex ${message.isJiya ? 'justify-start' : 'justify-end'}`}
             >
-              <div
+              <motion.div
+                whileHover={{ scale: 1.05, rotate: message.isJiya ? 2 : -2 }}
                 className={`
-                  max-w-xs md:max-w-md px-6 py-4 rounded-3xl shadow-soft hover-lift
+                  max-w-xs md:max-w-md px-6 py-4 rounded-3xl shadow-soft hover-glow cursor-pointer
                   ${message.isJiya 
                     ? 'bg-gradient-energy text-white rounded-bl-sm' 
                     : 'bg-gradient-love text-white rounded-br-sm'
@@ -118,11 +125,17 @@ const ChatSection = () => {
                     {message.isJiya ? 'Jiya' : '❤️'}
                   </span>
                   {message.isJiya && (
-                    <span className="text-lg basketball-bounce">🏀</span>
+                    <motion.span
+                      animate={{ rotate: [0, 15, -15, 0] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: message.id }}
+                      className="text-lg"
+                    >
+                      🏀
+                    </motion.span>
                   )}
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
 
