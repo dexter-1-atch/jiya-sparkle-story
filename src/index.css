@@ -2,41 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Jiya's Basketball Love Design System ❤️🏀 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Jiya's vibrant color palette */
+    --background: 35 100% 97%;
+    --foreground: 20 14.3% 4.1%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 20 14.3% 4.1%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 20 14.3% 4.1%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Basketball orange as primary */
+    --primary: 18 95% 55%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Warm gold secondary */
+    --secondary: 48 96% 65%;
+    --secondary-foreground: 20 14.3% 4.1%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 35 50% 95%;
+    --muted-foreground: 25 5.3% 44.7%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Love pink accent */
+    --accent: 328 85% 70%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 35 30% 90%;
+    --input: 35 30% 90%;
+    --ring: 18 95% 55%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
+
+    /* Jiya's special colors */
+    --basketball: 18 95% 55%;
+    --love: 328 85% 70%;
+    --sunshine: 48 96% 65%;
+    --energy: 15 100% 60%;
+
+    /* Beautiful gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(18 95% 55%), hsl(48 96% 65%));
+    --gradient-love: linear-gradient(135deg, hsl(328 85% 70%), hsl(18 95% 55%));
+    --gradient-energy: linear-gradient(180deg, hsl(48 96% 65%), hsl(15 100% 60%));
+    --gradient-subtle: linear-gradient(180deg, hsl(35 100% 97%), hsl(35 50% 95%));
+
+    /* Magical shadows */
+    --shadow-basketball: 0 10px 30px -10px hsl(18 95% 55% / 0.3);
+    --shadow-love: 0 10px 25px -8px hsl(328 85% 70% / 0.4);
+    --shadow-glow: 0 0 40px hsl(48 96% 65% / 0.3);
+    --shadow-soft: 0 4px 20px -4px hsl(20 14.3% 4.1% / 0.1);
+
+    /* Smooth animations */
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s ease-out;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +125,120 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-gradient-to-br from-background to-muted text-foreground;
+  }
+}
+
+/* Jiya's Custom Components */
+@layer components {
+  /* Hero gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
+  }
+
+  /* Basketball bounce animation */
+  .basketball-bounce {
+    @apply animate-bounce;
+    animation: basketballBounce 2s ease-in-out infinite;
+  }
+
+  /* Chat bubble animations */
+  .chat-slide-left {
+    @apply animate-[slideInLeft_0.6s_ease-out];
+  }
+  
+  .chat-slide-right {
+    @apply animate-[slideInRight_0.6s_ease-out];
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-all duration-300 hover:scale-105 hover:-translate-y-2;
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .hover-lift:hover {
+    box-shadow: var(--shadow-basketball);
+  }
+
+  /* Love pulse effect */
+  .love-pulse {
+    @apply animate-pulse;
+    animation: lovePulse 2s ease-in-out infinite;
+  }
+
+  /* Energy glow effect */
+  .energy-glow {
+    box-shadow: var(--shadow-glow);
+    @apply animate-pulse;
+  }
+}
+
+/* Custom Keyframes */
+@layer utilities {
+  @keyframes basketballBounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0) scale(1);
+    }
+    40% {
+      transform: translateY(-20px) scale(1.1);
+    }
+    60% {
+      transform: translateY(-10px) scale(1.05);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes lovePulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.8;
+    }
+  }
+
+  /* Utility classes */
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .bg-gradient-love {
+    background: var(--gradient-love);
+  }
+  
+  .bg-gradient-energy {
+    background: var(--gradient-energy);
+  }
+  
+  .shadow-basketball {
+    box-shadow: var(--shadow-basketball);
+  }
+  
+  .shadow-love {
+    box-shadow: var(--shadow-love);
   }
 }

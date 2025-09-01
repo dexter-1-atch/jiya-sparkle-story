@@ -52,6 +52,11 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// Jiya's special colors
+				basketball: 'hsl(var(--basketball))',
+				love: 'hsl(var(--love))',
+				sunshine: 'hsl(var(--sunshine))',
+				energy: 'hsl(var(--energy))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
